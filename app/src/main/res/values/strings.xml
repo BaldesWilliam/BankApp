@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">BankApp</string>
+    <string name="login_title">Welcome to the Banking App Please sign in or make an account if you are new.</string>
+    <string name="switch_to_create">Click here to create an account</string>
+    <string name="switch_to_login">Click here to use an existing account</string>
+    <string name="login_button">Login</string>
+    <string name="create_button">Create</string>
+    <string name="name_hint">Name</string>
+    <string name="password_hint">Password</string>
+    <string name="re_enter_password_hint">Re-enterPassword</string>
+    <string name="account_history_btn">Account History</string>
+    <string name="log_out_btn">Log out</string>
+    <string name="make_withdrawal_btn">Make Withdrawal</string>
+    <string name="make_deposit_btn">Make Deposit</string>
+    <string name="deposit_transaction">Deposit</string>
+    <string name="withdrawal_transaction">Withdrawal</string>
+    <string name="overdraft_fee_message">Overdraft Fee</string>
+    <string name="overdraft_amount">-$32.00</string>
+    <string name="test_date">01/01/1900</string>
+    <string name="history_message">Your Account History</string>
+    <string name="no_transactions_warning">You have no transactions.</string>
+    <string name="go_back_btn">Go Back</string>
+    <string name="deposit_message">Input what you would like to Deposit</string>
+    <string name="amount_hint">Amount</string>
+    <string name="description_hint">Description(optional)</string>
+    <string name="withdraw_message">Enter the Amount you want to withdraw</string>
+</resources>
