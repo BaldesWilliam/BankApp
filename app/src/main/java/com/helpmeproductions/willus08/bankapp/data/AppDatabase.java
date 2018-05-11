@@ -30,9 +30,10 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public static AppDatabase getPersistantDatabase(Context context){
         if (INSTANCE == null) {
-            Room.databaseBuilder(context.getApplicationContext(),AppDatabase.class,"appDatabase")
-                    .allowMainThreadQueries()
-                    .build();
+            INSTANCE =
+                Room.databaseBuilder(context.getApplicationContext(),AppDatabase.class,"appDatabase")
+                        .allowMainThreadQueries()
+                        .build();
 
         }
         return INSTANCE;
