@@ -40,7 +40,7 @@ public class History extends AppCompatActivity implements HistoryContract.View{
     }
 
     public void leaveHistory(View view) {
-        finish(); // check how his works
+        finish();
     }
 
     @Override

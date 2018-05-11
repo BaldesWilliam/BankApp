@@ -8,16 +8,19 @@ import com.helpmeproductions.willus08.bankapp.data.DataStorage;
 import com.helpmeproductions.willus08.bankapp.data.Encryption;
 import com.helpmeproductions.willus08.bankapp.model.CommonValues;
 import com.helpmeproductions.willus08.bankapp.model.Customer;
+
 import java.util.Random;
 
 public class LoginPresenter implements LoginContract.Presenter{
     private LoginContract.View view;
     private AppDatabase db;
     private Encryption encryption = new Encryption();
+    private String TAG = "Login Presenter";
 
     @Override
     public void addView(LoginContract.View view) {
         this.view = view;
+        db = AppDatabase.getInMemoryDatabase(view.getContext());
     }
 
     @Override
@@ -27,31 +30,36 @@ public class LoginPresenter implements LoginContract.Presenter{
 
     @Override
     public boolean checkCredentials(String UserName, String Password) {
-        db = AppDatabase.getInMemoryDatabase(view.getContext());
         DataStorage data = db.dataModel().getWithPassword(Password);
         if (data != null){
-            String encryptedAccountNumber = data.getEncryptedAccountNumber();
+            Log.d(TAG, "checkCredentials: found credentials ");
+            byte[] encryptedAccountNumber = data.getEncryptedAccountNumber();
 
              String decryptedNumber =  encryption.decrypt(
                   encryptedAccountNumber,
                   data.getDecryptingCipher(),
                   Password);
              if(!decryptedNumber.equals("")){
+                 Log.d(TAG, "checkCredentials: decrypted account number");
                  Customer customer = db.customerModel().loadCustomerByAcountNumber(decryptedNumber);
                  if(customer.getName().equals(UserName)){
+                     Log.d(TAG, "checkCredentials: account matches user");
                      CommonValues commonValues = CommonValues.getInstance();
                      commonValues.setUser(customer);
                      return true;
                  }else {
+                     Log.d(TAG, "checkCredentials: account found but wrong user");
                      view.displayMessage("Incorrect name or password");
                      return false;
                  }
              }else {
+                 Log.d(TAG, "checkCredentials: can not decrypt acount number");
                  view.displayMessage("Incorrect name or password");
                  return false;
              }
 
         }else{
+            Log.d(TAG, "checkCredentials: acount does not exist");
             view.displayMessage("Incorrect name or password");
             return false;
         }
@@ -60,15 +68,15 @@ public class LoginPresenter implements LoginContract.Presenter{
     @Override
     public boolean createNewUser(String userName, String Password, String PasswordConfirmation) {
         if(Password.equals(PasswordConfirmation)){
-            db = AppDatabase.getInMemoryDatabase(view.getContext());
-
             CommonValues commonValues = CommonValues.getInstance();
-            Customer user = new Customer(userName,generateAccountNumber());
+            String accountNumber = generateAccountNumber();
+
+            Customer user = new Customer(userName,accountNumber);
             commonValues.setUser(user);
 
 
             db.customerModel().addCustomer(user);
-            db.dataModel().addData(encryption.encryptAcountNumber(user.getAccountNumber(),Password));
+            db.dataModel().addData(encryption.encryptAcountNumber(Password,accountNumber));
             return true;
 
         }else{
@@ -84,7 +92,7 @@ public class LoginPresenter implements LoginContract.Presenter{
                 s.append("-");
             }
         }
-        Log.d("Test", "generateAccountNumber: " + s);
+        Log.d(TAG, "generateAccountNumber: " + s);
         return s.toString();
     }
 }

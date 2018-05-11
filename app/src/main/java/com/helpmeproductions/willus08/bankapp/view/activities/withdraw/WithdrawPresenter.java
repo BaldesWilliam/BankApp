@@ -26,6 +26,9 @@ public class WithdrawPresenter implements WithdrawContract.Presenter{
         Calendar calendar = Calendar.getInstance();
         String s = calendar.get(Calendar.DATE) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR);
         Customer user = commonValues.getUser();
+           if(description == null){
+               description = " ";
+           }
         Transaction withdraw = new Transaction(
                 "Withdraw",
                 description,

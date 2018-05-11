@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import butterknife.ButterKnife;
 
 public class Login extends AppCompatActivity implements LoginContract.View {
 
+    private static final String TAG = "Login";
     @Inject
     LoginPresenter presenter;
 
@@ -90,8 +92,9 @@ public class Login extends AppCompatActivity implements LoginContract.View {
         if(state.equals("Login")){
             String lName = name.getText().toString();
             String lPassword = password.getText().toString();
-
+            Log.d(TAG, "completeAction: trying to log on ");
             if(presenter.checkCredentials(lName,lPassword)){
+                Log.d(TAG, "completeAction: Logging on");
                 signIn();
             }else{
                 displayMessage("Wrong username or password");
@@ -101,8 +104,9 @@ public class Login extends AppCompatActivity implements LoginContract.View {
             String cName = name.getText().toString();
             String cPassword = password.getText().toString();
             String cConfirmPassword = passwordConfirm.getText().toString();
-
+            Log.d(TAG, "completeAction: trying to create account ");
             if(presenter.createNewUser(cName,cPassword,cConfirmPassword)){
+                Log.d(TAG, "completeAction: account created");
                 signIn();
             }else{
                 displayMessage("Could not create an account");

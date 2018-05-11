@@ -45,10 +45,16 @@ public class Deposit extends AppCompatActivity implements DepositContract.View{
     }
 
     public void makeDeposit(View view) {
-        presenter.makeDeposit(
-                Float.parseFloat(amount.getText().toString()),
-                description.getText().toString()
-        );
+        if(amount.getText() != null) {
+            presenter.makeDeposit(
+                    Float.parseFloat(amount.getText().toString()),
+                    description.getText().toString()
+            );
+            amount.setText("");
+            description.setText("");
+        }else{
+            displayMessage("input an amount");
+        }
     }
 
     public void goBack(View view) {

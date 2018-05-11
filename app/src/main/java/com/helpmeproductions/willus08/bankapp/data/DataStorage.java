@@ -10,20 +10,20 @@ public class DataStorage {
     @PrimaryKey
     @NonNull
     String password;
-    String encryptedAccountNumber;
-    String decryptingCipher;
+    byte[] encryptedAccountNumber;
+    byte[] decryptingCipher;
 
-    public DataStorage(String password, String encryptedAccountNumber, String decryptingCipher) {
+    public DataStorage(String password, byte[] encryptedAccountNumber, byte[] decryptingCipher) {
         this.password = password;
         this.encryptedAccountNumber = encryptedAccountNumber;
         this.decryptingCipher = decryptingCipher;
     }
 
-    public String getEncryptedAccountNumber() {
+    public byte[] getEncryptedAccountNumber() {
         return encryptedAccountNumber;
     }
 
-    public String getDecryptingCipher() {
+    public byte[] getDecryptingCipher() {
         return decryptingCipher;
     }
 

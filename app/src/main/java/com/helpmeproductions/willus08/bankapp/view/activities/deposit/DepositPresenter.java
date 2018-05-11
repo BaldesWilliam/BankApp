@@ -26,6 +26,9 @@ public class DepositPresenter implements DepositContract.Presenter {
         Calendar calendar = Calendar.getInstance();
         String s = calendar.get(Calendar.DATE) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR);
         Customer customer = commonValues.getUser();
+        if (description  == null){
+            description = " ";
+        }
         Transaction transaction = new Transaction(
                 "Deposit",
                 description,

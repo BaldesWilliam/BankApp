@@ -1,6 +1,7 @@
 package com.helpmeproductions.willus08.bankapp.data;
 
 import android.arch.persistence.room.Database;
+import android.arch.persistence.room.InvalidationTracker;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
@@ -31,5 +32,10 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public static void destroyInstance() {
         INSTANCE = null;
+    }
+
+    @Override
+    public InvalidationTracker getInvalidationTracker() {
+        return super.getInvalidationTracker();
     }
 }

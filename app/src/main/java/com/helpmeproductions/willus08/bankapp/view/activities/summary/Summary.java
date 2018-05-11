@@ -1,5 +1,6 @@
 package com.helpmeproductions.willus08.bankapp.view.activities.summary;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -105,6 +106,11 @@ public class Summary extends AppCompatActivity implements SummaryContract.View {
 
         }
 
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 
     public void changeScreen(View view) {

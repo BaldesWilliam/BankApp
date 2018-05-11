@@ -6,12 +6,15 @@ import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 import android.os.Parcel;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.helpmeproductions.willus08.bankapp.data.CustomerDao;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 @Entity
 @TypeConverters(CustomerDao.Converters.class)
@@ -44,6 +47,7 @@ public class Customer{
         this.name = name;
     }
 
+    @NonNull
     public String getAccountNumber() {
         return accountNumber;
     }
@@ -63,8 +67,11 @@ public class Customer{
 
     public void addTransaction(Transaction t){
         ArrayList<String> transactionList = CustomerDao.Converters.fromString(this.transactions);
+        if(transactionList == null){
+            transactionList = new ArrayList<>();
+        }
         Gson gson = new Gson();
-        transactionList.add( gson.toJson(t));
+        transactionList.add(gson.toJson(t));
         updateBalance(t);
         this.transactions = CustomerDao.Converters.fromArrayList(transactionList);
     }

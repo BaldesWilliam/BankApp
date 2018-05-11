@@ -40,10 +40,16 @@ public class Withdraw extends AppCompatActivity implements WithdrawContract.View
     }
 
     public void withdrawMoney(View view) {
-        presenter.makeWithdrawal(
-                Float.parseFloat(amount.getText().toString()),
-                description.getText().toString()
-        );
+        if(amount.getText() != null) {
+            presenter.makeWithdrawal(
+                    Float.parseFloat(amount.getText().toString()),
+                    description.getText().toString()
+            );
+            amount.setText("");
+            description.setText("");
+        }else{
+            displayMessage("input an amount");
+        }
     }
 
     public void goBack(View view) {

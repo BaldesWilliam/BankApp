@@ -49,14 +49,10 @@ public class Encryption {
                 byte[] encryptedAccountNumber = cipher.doFinal(accountNumber.getBytes("UTF-8"));
 
 
-
-                String cipherString = new String(iv, "UTF-8");
-                String acountNumberString = new String(encryptedAccountNumber, "UTF-8");
-
                 return new DataStorage(
                         password,
-                        acountNumberString,
-                        cipherString);
+                        encryptedAccountNumber,
+                        iv);
 
             }
 
@@ -81,7 +77,7 @@ public class Encryption {
         return null;
     }
 
-    public String decrypt(String toDecrypt, String decryptioncipher, String password){
+    public String decrypt(byte[] toDecrypt, byte[] decryptioncipher, String password){
         KeyStore keyStore;
         try {
             keyStore = KeyStore.getInstance("AndroidKeyStore");
@@ -95,9 +91,9 @@ public class Encryption {
             final Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
             final GCMParameterSpec spec;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-                spec = new GCMParameterSpec(128, decryptioncipher.getBytes());
+                spec = new GCMParameterSpec(128, decryptioncipher);
                 cipher.init(Cipher.DECRYPT_MODE, secretKey, spec);
-                final byte[] decodedData = cipher.doFinal(toDecrypt.getBytes());
+                final byte[] decodedData = cipher.doFinal(toDecrypt);
 
                return new String(decodedData, "UTF-8");
             }
