@@ -14,7 +14,6 @@ import com.helpmeproductions.willus08.bankapp.injection.summary.DaggerSummaryCom
 import com.helpmeproductions.willus08.bankapp.model.Customer;
 import com.helpmeproductions.willus08.bankapp.view.activities.deposit.Deposit;
 import com.helpmeproductions.willus08.bankapp.view.activities.history.History;
-import com.helpmeproductions.willus08.bankapp.view.activities.login.Login;
 import com.helpmeproductions.willus08.bankapp.view.activities.withdraw.Withdraw;
 
 import javax.inject.Inject;

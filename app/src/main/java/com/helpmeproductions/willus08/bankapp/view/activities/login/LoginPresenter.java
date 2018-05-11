@@ -1,6 +1,7 @@
 package com.helpmeproductions.willus08.bankapp.view.activities.login;
 
 
+import android.arch.persistence.room.Room;
 import android.util.Log;
 
 import com.helpmeproductions.willus08.bankapp.data.AppDatabase;
@@ -20,7 +21,7 @@ public class LoginPresenter implements LoginContract.Presenter{
     @Override
     public void addView(LoginContract.View view) {
         this.view = view;
-        db = AppDatabase.getInMemoryDatabase(view.getContext());
+        db = AppDatabase.getPersistantDatabase(view.getContext());
     }
 
     @Override

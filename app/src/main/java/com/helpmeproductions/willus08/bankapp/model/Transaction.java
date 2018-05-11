@@ -18,10 +18,6 @@ public class Transaction {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -41,8 +37,5 @@ public class Transaction {
     public String getDate() {
         return date;
     }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
+    
 }

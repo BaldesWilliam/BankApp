@@ -8,7 +8,7 @@ import java.util.List;
 
 public class HistoryPresenter implements HistoryContract.Presenter {
 
-    HistoryContract.View view;
+    private HistoryContract.View view;
 
     @Override
     public void addView(HistoryContract.View view) {

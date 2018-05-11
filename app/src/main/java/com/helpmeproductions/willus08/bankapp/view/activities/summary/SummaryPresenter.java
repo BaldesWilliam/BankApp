@@ -7,12 +7,12 @@ import com.helpmeproductions.willus08.bankapp.model.Customer;
 
 public class SummaryPresenter implements SummaryContract.Presenter{
     private  SummaryContract.View view;
-    AppDatabase db;
+    private AppDatabase db;
 
     @Override
     public void addView(SummaryContract.View view) {
         this.view = view;
-        db = AppDatabase.getInMemoryDatabase(view.getContext());
+        db = AppDatabase.getPersistantDatabase(view.getContext());
     }
 
     @Override

@@ -59,7 +59,11 @@ public class Customer{
     public List<Transaction> getTransactionList() {
         List<Transaction> transactions = new ArrayList<>();
         Gson gson = new Gson();
-        for (String s: CustomerDao.Converters.fromString(this.transactions)) {
+        List<String> stringArrayList = new ArrayList<>();
+        if(!this.transactions.equals("")){
+            stringArrayList = CustomerDao.Converters.fromString(this.transactions);
+        }
+        for (String s: stringArrayList) {
             transactions.add(gson.fromJson(s, Transaction.class));
         }
         return transactions;
